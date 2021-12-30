@@ -31,3 +31,4 @@ rm -f /etc/udm-le
 ln -sf "${DATA_DIR}/udm-le" /etc/udm-le 
 
 echo udm-le has been installed to "${DATA_DIR}/udm-le" and linked to /etc/udm-le.
+echo Please configure \"/etc/udm-le/udm-le.env\" with your provider settings and run \"udm-le initial\"
