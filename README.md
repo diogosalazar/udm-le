@@ -15,9 +15,21 @@ Out of the box, it has tested support for select [DNS providers](#dns-providers)
 
 ## Installation
 
-1. Copy the contents of this repo to your device at `/mnt/data/udm-le`.
-2. Edit `udm-le.env` and tweak variables to meet your needs.
-3. Run `/mnt/data/udm-le/udm-le.sh initial`. This will handle your initial certificate generation and setup a cron task at `/etc/cron.d/udm-le` to attempt certificate renewal each morning at 0300.
+1. SSH into the UDM/P (assuming it's on 192.168.1.254).
+
+    ```sh
+    ssh root@192.168.1.254
+    ```
+    
+2. Download and run the installation script. 
+
+    ```sh
+    curl -LSsf https://raw.githubusercontent.com/diogosalazar/udm-le/main/udm-le/install-udm-le.sh | sh
+    ```
+    
+	* For the UDM, UDM Pro, UDM-SE, and UXG Pro, the script will be installed to `/mnt/data/udm-le`. 
+	* For the UDR, the script will be installed to `/data/udm-le`.
+	* The installation will also link the script directory to `/etc/udm-le`, which will be used for configuration below.
 
 ## Persistance
 
