@@ -18,6 +18,15 @@ deploy_certs() {
 	if [ "$(find -L "${UDM_LE_PATH}"/lego -type f -name "${LEGO_CERT_NAME}".crt -mmin -5)" ]; then
 		echo 'New certificate was generated, time to deploy it'
 
+		if [ ! -f "${UBIOS_CONTROLLER_CERT_PATH}/unifi-core.crt.bkp" ]; then
+			echo "Creating backup of current certificate at ${UBIOS_CONTROLLER_CERT_PATH}/unifi-core.crt.bkp"
+			cp -f ${UBIOS_CONTROLLER_CERT_PATH}/unifi-core.crt ${UBIOS_CONTROLLER_CERT_PATH}/unifi-core.crt.bkp
+		fi
+		if [ ! -f "${UBIOS_CONTROLLER_CERT_PATH}/unifi-core.key.bkp" ]; then
+			echo "Creating backup of current certificate key at ${UBIOS_CONTROLLER_CERT_PATH}/unifi-core.key.bkp"
+			cp -f ${UBIOS_CONTROLLER_CERT_PATH}/unifi-core.key ${UBIOS_CONTROLLER_CERT_PATH}/unifi-core.key.bkp
+		fi
+
 		cp -f ${UDM_LE_PATH}/lego/certificates/${LEGO_CERT_NAME}.crt ${UBIOS_CONTROLLER_CERT_PATH}/unifi-core.crt
 		cp -f ${UDM_LE_PATH}/lego/certificates/${LEGO_CERT_NAME}.key ${UBIOS_CONTROLLER_CERT_PATH}/unifi-core.key
 		chmod 644 ${UBIOS_CONTROLLER_CERT_PATH}/unifi-core.crt ${UBIOS_CONTROLLER_CERT_PATH}/unifi-core.key
